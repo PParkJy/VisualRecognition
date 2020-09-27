@@ -27,10 +27,10 @@ def draw_prediction(img, class_id, confidence, x, y, x_plus_w, y_plus_h):
     cv2.rectangle(img, (x,y), (x_plus_w,y_plus_h), color, 2)
     cv2.putText(img, label, (x-10,y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
 
-    
+# 이미지 로드
 image = cv2.imread(args.image)
 
-Width = image.shape[1]
+Width = image.shape[1] 
 Height = image.shape[0]
 scale = 0.00392
 
@@ -40,14 +40,32 @@ with open(args.classes, 'r') as f:
     classes = [line.strip() for line in f.readlines()]
 
 COLORS = np.random.uniform(0, 255, size=(len(classes), 3))
+
+# YOLO 로드
+# weight = 미리 훈련된 모델
+# cfg = configuration 파일, YOLO 알고리즘
 net = cv2.dnn.readNet(args.weights, args.config)
+
+# 이미지를 네트워크에 넣기 위해 blob(이미지 특징 추출, 크기 조정)의 형태로 변환
+# YOLO의 허용 크기: 320x320, 609X609, 416X416
 blob = cv2.dnn.blobFromImage(image, scale, (416,416), (0,0,0), True, crop=False)
 net.setInput(blob)
+
+# outs = 탐지된 객체에 대한 모든 정보와 위치 저장
 outs = net.forward(get_output_layers(net))
+
+# class_ids = 객체의 이름
+# box = bounding box의 좌표
+# confidences = 객체의 신뢰도 (확률)
 
 class_ids = []
 confidences = []
 boxes = []
+
+# conf_threshold = 신뢰도
+# 1에 가까울수록 정확도가 높으나 탐지되는 물체의 수는 적어짐
+# 0에 가까울수록 정확도는 낮으나 탐지되는 물체의 수는 많아짐
+
 conf_threshold = 0.5
 nms_threshold = 0.4
 
@@ -68,7 +86,8 @@ for out in outs:
             confidences.append(float(confidence))
             boxes.append([x, y, w, h])
 
-
+# 노이즈 제거
+# 불필요한 bounding box 제거
 indices = cv2.dnn.NMSBoxes(boxes, confidences, conf_threshold, nms_threshold)
 
 for i in indices:
