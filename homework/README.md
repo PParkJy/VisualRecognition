@@ -1,7 +1,8 @@
 # 과제 부연설명 (읽어주세요!)
 
 ### Installation
-- 프로그램 실행을 위해 **openCV 라이브러리**가 필요합니다. <code>pip install opencv-python</code> 명령어를 입력해서 설치해주세요.     
+- 프로그램 실행을 위해 **openCV 라이브러리**가 필요합니다. <code>pip install opencv-python==3.4.2.16</code> 명령어를 입력해서 설치해주세요.     
+- 혹시 **상위 버전의 라이브러리를 사용**하고 있다면 <code>pip uninstall opencv-python</code> 진행 후 다시 설치해주시길 바랍니다. 
 <br/>
 
 ### Download
