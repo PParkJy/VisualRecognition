@@ -5,8 +5,8 @@
 <br/>
 
 ### Download
-1. https://github.com/PParkJy/VisualRecognition/ 사이트에서 example과 homework 파일을 다운로드 받습니다.
-2. https://pjreddie.com/media/files/yolov3.weights 사이트에서 yolov3.weights 파일을 다운로드 받습니다. 
+1. https://github.com/PParkJy/VisualRecognition/ 사이트에서 **example과 homework 파일을 다운로드** 받습니다.
+2. https://pjreddie.com/media/files/yolov3.weights 사이트에서 **yolov3.weights 파일을 다운로드** 받습니다. 
 3. 다운받은 yolov3.weights 파일을 **homework.py가 위치한 폴더**로 이동시킵니다.
 4. example 폴더에서 **yolov3.cfg, yolov3.txt** 파일을 **homework.py가 위치한 폴더**로 복사합니다.
 5. yolov3.txt의 클래스들을 참고하여 인터넷에서 detection이 될 만한 이미지를 다운로드 합니다.     
