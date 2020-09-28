@@ -9,7 +9,7 @@
 2. https://pjreddie.com/media/files/yolov3.weights 사이트에서 **yolov3.weights 파일을 다운로드** 받습니다. 
 3. 다운받은 yolov3.weights 파일을 **homework.py가 위치한 폴더**로 이동시킵니다.
 4. example 폴더에서 **yolov3.cfg, yolov3.txt** 파일을 **homework.py가 위치한 폴더**로 복사합니다.
-5. yolov3.txt의 클래스들을 참고하여 인터넷에서 detection이 될 만한 이미지를 다운로드 합니다.     
+5. **yolov3.txt의 클래스들을 참고**하여 **인터넷에서 detection이 될 만한 이미지를 다운로드** 합니다.     
    (예시: bicycle, cat이라는 클래스가 존재하므로 자전거와 고양이가 같이 있는 이미지를 다운로드)   
    **이미지 확장자는 jpg**를 추천합니다.
 6. 다운받은 이미지를 **homework.py가 위치한 폴더**로 이동시킵니다.    
