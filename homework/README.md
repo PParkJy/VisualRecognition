@@ -21,7 +21,7 @@
 ### Execution
 1. **homework.py를 주석을 참고하여 수정**합니다.
 2. **cmd 창** (또는 anaconda prompt)를 열고 **homework.py가 위치한 폴더로 이동**합니다. (cd 명령어 사용) 
-3. <code> python homework.py --image (본인이 다운받은 이미지 파일명.jpg) --config yolov3.cfg --weights yolov3.weights </code> 를 실행합니다. 
+3. <code> python homework.py --image (본인이 다운받은 이미지 파일명.jpg) --config yolov3.cfg --weights yolov3.weights --classes yolov3.txt </code> 를 실행합니다. 
 4. **result.jpg가 잘 생성된 것을 확인**합니다.
 
 <br/>
