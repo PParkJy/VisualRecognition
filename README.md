@@ -199,7 +199,7 @@ YOLO를 이용한 **Object detection**
         - classes = class 수     
         <br>
     2) Set data    
-        : <u>Yolo_정mark/x64/Release/data/img</u> directory를 <u>darknet/data</u> 밑으로 복사     
+        : <u>Yolo_mark/x64/Release/data/img</u> directory를 <u>darknet/data</u> 밑으로 복사     
         : <u>Yolo_mark/x64/Release/data/</u>에 있는 obj.data, obj.names, train.txt를 <u>darknet/data</u> 밑으로 복사    
         : train.txt의 경로가 image 경로와 동일한 지 확인 및 수정
         <img width="793" alt="image" src="https://user-images.githubusercontent.com/46422952/134056589-45babaf4-6162-4760-a66e-ae299879d799.png">    
