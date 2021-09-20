@@ -102,16 +102,23 @@ YOLO를 이용한 **Object detection**
     1) ``` git clone https://github.com/AlexeyAB/darknet ```    
     <br>
     2) Makefile 상황에 맞게 수정   
-    (1) GPU, CuDNN, OpenCV 등 사용할 option 설정    
-![image](https://user-images.githubusercontent.com/46422952/133800076-8e2dc630-102f-44e4-be99-38001a4f74b8.png)    
-    (2) 본인의 CUDA 설치 폴더 확인 및 변수(COMMON, LDFLAG) 수정    
-![image](https://user-images.githubusercontent.com/46422952/133802407-68d9e977-afe1-4249-9aaa-fc7d05bd880a.png)    
-    (3) NVCC 변수 수정    
-    ![image](https://user-images.githubusercontent.com/46422952/133803851-5fbfd47a-3d0c-4030-b27e-d7a1fe55bbbd.png)    
+        (1) GPU, CuDNN, OpenCV 등 사용할 option 설정    
+        
+        ![image](https://user-images.githubusercontent.com/46422952/133800076-8e2dc630-102f-44e4-be99-38001a4f74b8.png)    
+
+        (2) 본인의 CUDA 설치 폴더 확인 및 변수(COMMON, LDFLAG) 수정    
+        
+        ![image](https://user-images.githubusercontent.com/46422952/133802407-68d9e977-afe1-4249-9aaa-fc7d05bd880a.png)    
+    
+        (3) NVCC 변수 수정    
+        
+        ![image](https://user-images.githubusercontent.com/46422952/133803851-5fbfd47a-3d0c-4030-b27e-d7a1fe55bbbd.png)    
     <br>
+
     3) Build  
     ``` make ```  
     <br> 
+    
     4) Test    
     (1) coco dataset에 학습된 yolov4 weight 다운로드    
     ``` wget https://github.com/AlexeyAB/darknet/releases/download/darknet_yolo_v3_optimal/yolov4.weights ```    
@@ -137,8 +144,8 @@ YOLO를 이용한 **Object detection**
 
 ## Dataset
 1. Train, test image
-![image](https://user-images.githubusercontent.com/46422952/134033493-a88d830d-2e5a-4eeb-8451-3044506c93a7.png)     
-: train 10장, test 2장 및 video      
+    ![image](https://user-images.githubusercontent.com/46422952/134033493-a88d830d-2e5a-4eeb-8451-3044506c93a7.png)     
+    : train 10장, test 2장 및 video      
 
 <br>
 
@@ -162,11 +169,12 @@ YOLO를 이용한 **Object detection**
         - 동일 directory에 자신의 data 복사
         - <u>Yolo_mark/x64/Release/data/obj.data</u>의 classes 수정
         - <u>Yolo_mark/x64/Release/data/obj.name</u>의 class name 수정 
-        <img width="515" alt="image" src="https://user-images.githubusercontent.com/46422952/134046002-1b299bd2-9a14-4a6d-a443-fe1779e42199.png">
+
+            <img width="515" alt="image" src="https://user-images.githubusercontent.com/46422952/134046002-1b299bd2-9a14-4a6d-a443-fe1779e42199.png">      
 
         (3) Run
         <u>Yolo_mark</u>에 있는 linux_mark.sh 실행 ( ``` sh linux_mark.sh ``` )
-        <img width="1147" alt="image" src="https://user-images.githubusercontent.com/46422952/134043442-446b1de6-eda2-4bd0-babe-69087a7f31ad.png">
+            <img width="1147" alt="image" src="https://user-images.githubusercontent.com/46422952/134043442-446b1de6-eda2-4bd0-babe-69087a7f31ad.png">
         프로그램 종료는 esc     
 
 <br>
@@ -220,7 +228,7 @@ YOLO를 이용한 **Object detection**
 
     ![predictions](https://user-images.githubusercontent.com/46422952/134036292-12fe0b45-5cc7-4a00-8b09-ebf319181de6.jpg)     
     <br>
-름
+
 2. Video     
     ```python darknet_video.py --input <test video 경로> --out_filename <저장할 file 이름> --weights ./backup/yolov4_best.weights --config_file ./cfg/yolov4.cfg --data_file ./data/obj.data --thresh 0.8 --ext_output ```    
 
