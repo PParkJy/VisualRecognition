@@ -122,11 +122,11 @@ YOLO를 이용한 **Object detection**
     ``` wget https://github.com/AlexeyAB/darknet/releases/download/darknet_yolo_v3_optimal/yolov4.weights ```    
     (2) 실행 (example) 
         - Image    
-            ```./darknet detect cfg/coco.data cfg/yolov4.cfg yolov4.weights data/dog.jpg```    
+            ```sh image_yolo4.sh```    
         - Video   
-            ```./darknet demo cfg/coco.data cfg/yolov4.cfg yolov4.weights <video file>```   
+            ```sh video_yolo4.sh```   
         - Web cam     
-        ```./darknet demo cfg/coco.data cfg/yolov4.cfg yolov4.weights -c 0(or 1)```
+        ```sh net_cam_v4.sh```
 
 <br>
 
@@ -222,10 +222,16 @@ YOLO를 이용한 **Object detection**
 <br>
 
 ## Detection
-1. Image     
+1. Image    
     ``` ./darknet detector test ./data/obj.data ./cfg/yolov4.cfg ./backup/yolov4_best.weights <test image 경로> --ext_output```   
 
-    ![predictions](https://user-images.githubusercontent.com/46422952/134036292-12fe0b45-5cc7-4a00-8b09-ebf319181de6.jpg)     
+    ![predictions](https://user-images.githubusercontent.com/46422952/134036292-12fe0b45-5cc7-4a00-8b09-ebf319181de6.jpg)      
+
+    또는 (darknet 기반의 weight만 이용한 OpenCV program)
+    ``` python opencv_images_annot.py --image <test image 경로> --output <저장할 file 이름> --weights ./backup/yolov4_best.weights --config ./cfg/yolov4.cfg --classes ./data/obj.names ```
+
+    ![opencv_test](https://user-images.githubusercontent.com/46422952/134079249-0d279e8a-3c29-481f-a57c-d9040626da67.jpg)
+
     <br>
 
 2. Video     
