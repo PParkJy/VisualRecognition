@@ -101,18 +101,16 @@ YOLO를 이용한 **Object detection**
 1. Darknet 설치    
     1) ``` git clone https://github.com/AlexeyAB/darknet ```    
     <br>
-    2) Makefile 상황에 맞게 수정   
-        (1) GPU, CuDNN, OpenCV 등 사용할 option 설정    
-        
-        ![image](https://user-images.githubusercontent.com/46422952/133800076-8e2dc630-102f-44e4-be99-38001a4f74b8.png)    
+    2) Makefile 상황에 맞게 수정       
+    - GPU, CuDNN, OpenCV 등 사용할 option 설정       
+            ![image](https://user-images.githubusercontent.com/46422952/133800076-8e2dc630-102f-44e4-be99-38001a4f74b8.png)    
 
-        (2) 본인의 CUDA 설치 폴더 확인 및 변수(COMMON, LDFLAG) 수정    
-        
-        ![image](https://user-images.githubusercontent.com/46422952/133802407-68d9e977-afe1-4249-9aaa-fc7d05bd880a.png)    
+    - 본인의 CUDA 설치 폴더 확인 및 변수(COMMON, LDFLAG) 수정    
+            ![image](https://user-images.githubusercontent.com/46422952/133802407-68d9e977-afe1-4249-9aaa-fc7d05bd880a.png)    
     
-        (3) NVCC 변수 수정    
-        
-        ![image](https://user-images.githubusercontent.com/46422952/133803851-5fbfd47a-3d0c-4030-b27e-d7a1fe55bbbd.png)    
+    - NVCC 변수 수정    
+            ![image](https://user-images.githubusercontent.com/46422952/133803851-5fbfd47a-3d0c-4030-b27e-d7a1fe55bbbd.png)    
+            
     <br>
 
     3) Build  
@@ -144,6 +142,7 @@ YOLO를 이용한 **Object detection**
 
 ## Dataset
 1. Train, test image
+     
     ![image](https://user-images.githubusercontent.com/46422952/134033493-a88d830d-2e5a-4eeb-8451-3044506c93a7.png)     
     : train 10장, test 2장 및 video      
 
