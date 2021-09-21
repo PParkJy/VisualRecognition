@@ -248,7 +248,7 @@ YOLO를 이용한 **Object detection**
 ## 실습 방법
 : **Darknet 기반의 object detection의 경우, 자신의 PC에서 build한 darknet이 필요하므로 darknet을 설치하지 않을 경우 사용이 불가능합니다.**      
 : **그러므로 실습을 위해 OpenCV 기반의 object detection을 사용하는 것을 권장드리며 이를 위해 필요한 file과 사용 예시를 적어두겠습니다.**     
-: **예시의 경우, coco dataset에 대해 학습된 yolov4 model입니다.**   
+: **예시의 경우, coco dataset에 대해 학습된 yolov4 model이므로 coco.names에 포함된 class가 아니면 detection이 수행되지 않습니다.**   
 
 1. File Download     
 - opencv_image_annot.py download    
@@ -261,7 +261,7 @@ YOLO를 이용한 **Object detection**
 ``` python opencv_image_annot.py --image <test image 경로> --output <저장할 file 이름> --weights <weights 확장자 file의 경로> --config <cfg 확장자 file의 경로> --classes <names 확장자 file 또는 class 이름들이 적힌 file의 경로> ```    
 example)      
 ``` python opencv_image_annot.py --image test.jpg --output result.jpg --weights yolov4.weights --config yolov4.cfg --classes coco.names```    
-(위의 예시가 정상적으로 동작하려면 모든 file이 동일한 folder에 위치해야합니다.)
+(* 위의 예시가 정상적으로 동작하려면 모든 file이 동일한 folder에 위치해야합니다.)
 
 
 <br>
