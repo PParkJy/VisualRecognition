@@ -102,6 +102,7 @@ YOLO를 이용한 **Object detection**
     1) ``` git clone https://github.com/AlexeyAB/darknet ```    
     <br>
     2) Makefile 상황에 맞게 수정       
+    
     - GPU, CuDNN, OpenCV 등 사용할 option 설정       
             ![image](https://user-images.githubusercontent.com/46422952/133800076-8e2dc630-102f-44e4-be99-38001a4f74b8.png)    
 
