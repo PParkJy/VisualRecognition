@@ -2,7 +2,7 @@ import cv2
 import argparse
 import numpy as np
 
-# Option setting
+# Option 지정
 parser = argparse.ArgumentParser()
 parser.add_argument('-i', '--image', required=True,
                 help = 'path to input image')

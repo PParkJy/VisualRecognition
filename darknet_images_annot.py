@@ -8,7 +8,7 @@ import cv2
 import numpy as np
 import darknet
 
-
+# option 지정
 def parser():
     parser = argparse.ArgumentParser(description="YOLO Object Detection")
     parser.add_argument("--input", type=str, default="",
@@ -34,7 +34,7 @@ def parser():
                         help="remove detections with lower confidence")
     return parser.parse_args()
 
-
+# option 오류 확인
 def check_arguments_errors(args):
     assert 0 < args.thresh < 1, "Threshold should be a float between zero and one (non-inclusive)"
     if not os.path.exists(args.config_file):
@@ -46,7 +46,7 @@ def check_arguments_errors(args):
     if args.input and not os.path.exists(args.input):
         raise(ValueError("Invalid image path {}".format(os.path.abspath(args.input))))
 
-
+# batch size와 image size 오류 확인
 def check_batch_shape(images, batch_size):
     """
         Image sizes should be the same width and height
@@ -58,7 +58,7 @@ def check_batch_shape(images, batch_size):
         raise ValueError("Batch size higher than number of images")
     return shapes[0]
 
-
+# 다양한 방법으로 image 불러오
 def load_images(images_path):
     """
     If image path is given, return it directly
@@ -78,25 +78,26 @@ def load_images(images_path):
             glob.glob(os.path.join(images_path, "*.png")) + \
             glob.glob(os.path.join(images_path, "*.jpeg"))
 
-
+# 입력한 image를 darknet의 format에 맞게 처리
 def prepare_batch(images, network, channels=3):
+    # YOLO의 허용 크기: 320x320, 609X609, 416X416
     width = darknet.network_width(network)
     height = darknet.network_height(network)
 
     darknet_images = []
     for image in images:
-        image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+        image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB) #opencv의 경우, image를 BGR 형태로 불러오므로 RGB로 변환
         image_resized = cv2.resize(image_rgb, (width, height),
                                    interpolation=cv2.INTER_LINEAR)
-        custom_image = image_resized.transpose(2, 0, 1)
+        custom_image = image_resized.transpose(2, 0, 1) #opencv의 경우, image를 HWC 형태로 불러오므로 CHW 형태로 변환
         darknet_images.append(custom_image)
 
-    batch_array = np.concatenate(darknet_images, axis=0)
-    batch_array = np.ascontiguousarray(batch_array.flat, dtype=np.float32)/255.0
-    darknet_images = batch_array.ctypes.data_as(darknet.POINTER(darknet.c_float))
+    batch_array = np.concatenate(darknet_images, axis=0) #data 배열 합치기
+    batch_array = np.ascontiguousarray(batch_array.flat, dtype=np.float32)/255.0 #memory에 연속적인 배열 생성 및 정규화
+    darknet_images = batch_array.ctypes.data_as(darknet.POINTER(darknet.c_float)) #data 형변환
     return darknet.IMAGE(width, height, channels, darknet_images)
 
-
+# object detection
 def image_detection(image_path, network, class_names, class_colors, thresh):
     # Darknet doesn't accept numpy images.
     # Create one with image we reuse for each detect
@@ -112,10 +113,13 @@ def image_detection(image_path, network, class_names, class_colors, thresh):
     darknet.copy_image_from_bytes(darknet_image, image_resized.tobytes())
     detections = darknet.detect_image(network, class_names, darknet_image, thresh=thresh)
     darknet.free_image(darknet_image)
+
+    # object detection은 darknet_image로 하고 실제로 bounding box를 그리는 것은 실제 image에서 수행
     image = darknet.draw_boxes(detections, image_resized, class_colors)
     return cv2.cvtColor(image, cv2.COLOR_BGR2RGB), detections
 
-
+'''
+# 여러 image를 처리할 때 사용하는 함수
 def batch_detection(network, images, class_names, class_colors,
                     thresh=0.25, hier_thresh=.5, nms=.45, batch_size=4):
     image_height, image_width, _ = check_batch_shape(images, batch_size)
@@ -134,42 +138,7 @@ def batch_detection(network, images, class_names, class_colors,
     darknet.free_batch_detections(batch_detections, batch_size)
     return images, batch_predictions
 
-
-def image_classification(image, network, class_names):
-    width = darknet.network_width(network)
-    height = darknet.network_height(network)
-    image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-    image_resized = cv2.resize(image_rgb, (width, height),
-                                interpolation=cv2.INTER_LINEAR)
-    darknet_image = darknet.make_image(width, height, 3)
-    darknet.copy_image_from_bytes(darknet_image, image_resized.tobytes())
-    detections = darknet.predict_image(network, darknet_image)
-    predictions = [(name, detections[idx]) for idx, name in enumerate(class_names)]
-    darknet.free_image(darknet_image)
-    return sorted(predictions, key=lambda x: -x[1])
-
-
-def convert2relative(image, bbox):
-    """
-    YOLO format use relative coordinates for annotation
-    """
-    x, y, w, h = bbox
-    height, width, _ = image.shape
-    return x/width, y/height, w/width, h/height
-
-
-def save_annotations(name, image, detections, class_names):
-    """
-    Files saved with image_name.txt and relative coordinates
-    """
-    file_name = os.path.splitext(name)[0] + ".txt"
-    with open(file_name, "w") as f:
-        for label, confidence, bbox in detections:
-            x, y, w, h = convert2relative(image, bbox)
-            label = class_names.index(label)
-            f.write("{} {:.4f} {:.4f} {:.4f} {:.4f} {:.4f}\n".format(label, x, y, w, h, float(confidence)))
-
-
+#여러 image를 한 번에 처리하는 batch detection의 예제
 def batch_detection_example():
     args = parser()
     check_arguments_errors(args)
@@ -189,7 +158,43 @@ def batch_detection_example():
         cv2.imwrite(name.replace("data/", ""), image)
     print(detections)
 
+'''
+# image에서 다양한 객체 분류
+def image_classification(image, network, class_names):
+    width = darknet.network_width(network)
+    height = darknet.network_height(network)
+    image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+    image_resized = cv2.resize(image_rgb, (width, height),
+                                interpolation=cv2.INTER_LINEAR)
+    darknet_image = darknet.make_image(width, height, 3)
+    darknet.copy_image_from_bytes(darknet_image, image_resized.tobytes())
+    detections = darknet.predict_image(network, darknet_image)
+    predictions = [(name, detections[idx]) for idx, name in enumerate(class_names)]
+    darknet.free_image(darknet_image)
+    return sorted(predictions, key=lambda x: -x[1]류
 
+# YOLO의 경우, 전체 image 크기에 상대적으로 표현된 bounding box의 좌표를 사용
+def convert2relative(image, bbox):
+    """
+    YOLO format use relative coordinates for annotation
+    """
+    x, y, w, h = bbox
+    height, width, _ = image.shape
+    return x/width, y/height, w/width, h/height
+
+# detect된 객체의 bounding box 정보 및 class id 저장
+def save_annotations(name, image, detections, class_names):
+    """
+    Files saved with image_name.txt and relative coordinates
+    """
+    file_name = os.path.splitext(name)[0] + ".txt"
+    with open(file_name, "w") as f:
+        for label, confidence, bbox in detections:
+            x, y, w, h = convert2relative(image, bbox)
+            label = class_names.index(label)
+            f.write("{} {:.4f} {:.4f} {:.4f} {:.4f} {:.4f}\n".format(label, x, y, w, h, float(confidence)))
+
+# 실제로 함수가 실행되는 main
 def main():
     args = parser()
     check_arguments_errors(args)
@@ -224,7 +229,7 @@ def main():
         print("FPS: {}".format(fps))
         if not args.dont_show:
             cv2.imshow('Inference', image)
-            if cv2.waitKey() & 0xFF == ord('q'):
+            if cv2.waitKey() & 0xFF == ord('q'): #q버튼을 누르면 종료
                 break
         index += 1
 
