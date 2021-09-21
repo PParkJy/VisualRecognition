@@ -180,7 +180,7 @@ YOLO를 이용한 **Object detection**
 <br>
 
 ## Training
-1. Setting [4]    
+1. Setting [4,6]    
     1) Edit cfg file     
         : <u>darknet/cfg</u>에 있는 yolov4.cfg 편집
 
