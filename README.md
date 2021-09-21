@@ -250,14 +250,18 @@ YOLO를 이용한 **Object detection**
 : **그러므로 실습을 위해 OpenCV 기반의 object detection을 사용하는 것을 권장드리며 이를 위해 필요한 file과 사용 예시를 적어두겠습니다.**     
 : **예시의 경우, coco dataset에 대해 학습된 yolov4 model이므로 coco.names에 포함된 class가 아니면 detection이 수행되지 않습니다.**   
 
-1. File Download     
+0. Install      
+``` pip install numpy==1.20.3 ```     
+``` pip install opencv-python==4.5.3.56 ```
+
+1. File Download    
 - opencv_image_annot.py download    
 - coco.names download    
 - https://github.com/AlexeyAB/darknet/releases/download/darknet_yolo_v3_optimal/yolov4.weights download    
 - https://github.com/AlexeyAB/darknet/releases/download/darknet_yolo_v3_optimal/yolov4.cfg download
 
-
 2. Run     
+: python 파일이 위치한 곳에서 CMD 또는 본인이 사용하는 Anaconda 창을 실행시키고 아래의 명령어를 실행합니다.         
 ``` python opencv_image_annot.py --image <test image 경로> --output <저장할 file 이름> --weights <weights 확장자 file의 경로> --config <cfg 확장자 file의 경로> --classes <names 확장자 file 또는 class 이름들이 적힌 file의 경로> ```    
 example)      
 ``` python opencv_image_annot.py --image test.jpg --output result.jpg --weights yolov4.weights --config yolov4.cfg --classes coco.names```    
