@@ -73,7 +73,7 @@ for out in outs:
         scores = detection[5:]
         class_id = np.argmax(scores)
         confidence = scores[class_id]
-        if confidence > 0.5:
+        if confidence > conf_threshold:
             center_x = int(detection[0] * Width)
             center_y = int(detection[1] * Height)
             w = int(detection[2] * Width)
