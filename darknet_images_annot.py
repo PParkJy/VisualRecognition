@@ -171,7 +171,7 @@ def image_classification(image, network, class_names):
     detections = darknet.predict_image(network, darknet_image)
     predictions = [(name, detections[idx]) for idx, name in enumerate(class_names)]
     darknet.free_image(darknet_image)
-    return sorted(predictions, key=lambda x: -x[1]류
+    return sorted(predictions, key=lambda x: -x[1]
 
 # YOLO의 경우, 전체 image 크기에 상대적으로 표현된 bounding box의 좌표를 사용
 def convert2relative(image, bbox):
