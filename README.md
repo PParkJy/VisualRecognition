@@ -16,7 +16,7 @@ YOLO를 이용한 **Object detection**
 ![image](https://user-images.githubusercontent.com/46422952/133784464-1e3fde6c-f5a5-4817-857b-f754a9a69327.png) [2]    
 
     : CNN 기반의 object detection algorithm
-    : 현재 YOLOv5까지 공개되었으나 실습에서는 v4를 사용
+    : 다양한 버전이 공개되었으나 실습에서는 v4를 사용
     : YOLOv4 architecture
         - Backbone: CSP-Darknet53 
         - Neck: SPP, PANet
