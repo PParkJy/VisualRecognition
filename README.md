@@ -228,7 +228,7 @@ YOLO를 이용한 **Object detection**
 
     ![predictions](https://user-images.githubusercontent.com/46422952/134036292-12fe0b45-5cc7-4a00-8b09-ebf319181de6.jpg)      
 
-    또는 (darknet 기반의 weight만 이용한 OpenCV program)
+    또는 (darknet 기반의 weight만 이용한 OpenCV program)     
     ``` python opencv_images_annot.py --image <test image 경로> --output <저장할 file 이름> --weights ./backup/yolov4_best.weights --config ./cfg/yolov4.cfg --classes ./data/obj.names ```
 
     ![opencv_test](https://user-images.githubusercontent.com/46422952/134079249-0d279e8a-3c29-481f-a57c-d9040626da67.jpg)
