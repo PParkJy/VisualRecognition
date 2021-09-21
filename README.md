@@ -251,13 +251,16 @@ YOLO를 이용한 **Object detection**
 : **예시의 경우, coco dataset에 대해 학습된 yolov4 model입니다.**   
 
 1. File Download     
-- opencv_image_annot.py, 
-- 
+- opencv_image_annot.py download    
+- coco.names download    
+- https://github.com/AlexeyAB/darknet/releases/download/darknet_yolo_v3_optimal/yolov4.weights download    
+- https://github.com/AlexeyAB/darknet/releases/download/darknet_yolo_v3_optimal/yolov4.cfg download
+
 
 2. Run     
 ``` python opencv_image_annot.py --image <test image 경로> --output <저장할 file 이름> --weights <weights 확장자 file의 경로> --config <cfg 확장자 file의 경로> --classes <names 확장자 file 또는 class 이름들이 적힌 file의 경로> ```    
 example)      
-``` python opencv_image_annot.py --image test.jpg --output result.jpg --weights yolov4.weights --config yolov4.cfg --classes  ```    
+``` python opencv_image_annot.py --image test.jpg --output result.jpg --weights yolov4.weights --config yolov4.cfg --classes coco.names```    
 (위의 예시가 정상적으로 동작하려면 모든 file이 동일한 folder에 위치해야합니다.)
 
 
